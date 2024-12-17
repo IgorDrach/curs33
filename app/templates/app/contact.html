@@ -1,0 +1,87 @@
+﻿{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    body {
+        background-color: #696969;
+        margin-right: 20px;
+    }
+    .contact-section {
+        background: url("{% static 'app/content/tex.jpg' %}");
+        background-size: cover; /* Полное покрытие */
+        background-position: center; /* Центровать изображение */
+        height: 75vh; /* 75% от высоты экрана */
+        width: 100%; /* Полная ширина */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #E3F2FD; /* Цвет текста */
+        text-align: center; /* По центру текст */
+        position: relative; /* Для возможного дальнейшего позиционирования */
+    }
+
+        .contact-section h2 {
+            margin-bottom: 30px; /* Отступ под заголовком */
+        }
+
+        .contact-section a {
+            font-family: 'Nunito', sans-serif;
+            font-size: 24px;
+            color: #E3FBFF;
+            text-decoration: none;
+            text-shadow: 1px 1px 0 black; /* Черный контур */
+        }
+
+            .contact-section a:hover {
+                text-decoration: underline;
+                color: #a9d6e5;
+                text-shadow: 1px 1px 0 black; /* Черный контур */
+            }
+
+    .address {
+        font-family: 'Nunito', sans-serif;
+        font-size: 23px;
+        color: #E3F2FD;
+        text-align: justify;
+        text-shadow: 1px 1px 0 black; /* Черный контур */
+    }
+
+
+    .map-image {
+        width: 100%; /* Ширина 100% */
+        height: 45vh; /* Высота 30% высоты контейнера */
+        object-fit: cover; /* Обеспечивает сохранение пропорций */
+    }
+</style>
+
+<div class="contact-section">
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <h2 style="font-family: 'Marck Script', cursive; color: #E3F2FD;">Наши контакты</h2>
+
+    <div class="address">
+        <address>
+            Mojo Gastro Bar -
+            Бар, паб,ресторан,кафе<br />
+            Адрес: Псков, ул. Кремль,7А <br />
+            <abbr title="Телефон">Номер телефона:</abbr>
+            <span style="text-decoration: none;">+7 (8112)61-06-26</span>
+        </address>
+
+        <address>
+            <strong>Наша страница в VK:</strong> <a href="https://vk.com/mojo_gastrobar">https://vk.com/mojo_gastrobar</a><br />
+            <strong>Техническая поддержка:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
+            <strong>Отдел маркетинга:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        </address>
+    </div>
+</div>
+
+<!-- Добавляем карту -->
+<img src="{% static 'app/content/karta.png' %}" alt="Карта" class="map-image" />
+
+{% endblock %}

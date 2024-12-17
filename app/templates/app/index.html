@@ -1,0 +1,283 @@
+﻿{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0; /* Убираем отступы */
+        font-family: 'Keania One', cursive; /* Шрифт текста */
+        background-color: #696969; /* Цвет фона на всю страницу */
+        color: #E3FBFF; /* Цвет текста */
+    }
+
+    .full-screen-background {
+        background: url("{% static 'app/content/fon.png' %}") no-repeat center center; /* Фон изображение */
+        background-size: cover;
+        width: 100vw;
+        height: 100vh; /* Высота экрана */
+        position: absolute; /* Обернем в абсолютное позиционирование */
+        top: 0;
+        left: 0; /* Убедимся, что сдвига нет */
+        z-index: -1; /* Позиционируем под текстом */
+    }
+
+    .content-wrapper {
+        padding: 20px; /* Отступы внутри блока */
+        max-width: 900px; /* Максимальная ширина блока с текстом */
+        margin: 635px auto 0; /* Отступ сверху для отделения от фона, центрирование */
+        text-align: justify; /* Выравнивание текста по ширине */
+    }
+
+    .after-image-content {
+        margin: 20px; /* Отступы вокруг текста */
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .section-title {
+        font-family: 'Marck Script', cursive; /* Шрифт "Marck Script" */
+        text-align: center; /* Выравнивание по центру */
+        color: #000; /* Цвет текста */
+        font-size: 35px; /* Размер шрифта */
+        margin-top: 15px; /* Отступ сверху для отделения от предыдущего контента */
+    }
+
+    .icon-container {
+        display: flex; /* Используем flexbox для выравнивания иконок */
+        flex-direction: column; /* Столбчатое расположение для контейнера иконок */
+        align-items: center; /* Центровка по горизонтали */
+        margin-top: 20px; /* Отступ сверху для отделения от заголовка */
+    }
+
+    .icon-row {
+        display: flex; /* Используем flexbox для создания строки иконок */
+        justify-content: center; /* Центровка элементов в строке */
+        margin: 20px 0; /* Отступ между строками иконок */
+        width: 100%; /* Устанавливаем ширину строки на 100% */
+    }
+
+    .icon {
+        flex: 1; /* Разделяем доступное пространство по равному расстоянию */
+        text-align: center; /* Центрируем подпись под иконкой */
+        padding: 0 20px; /* Отступы по горизонтали */
+    }
+
+        .icon img {
+            width: 70px; /* Ширина иконки */
+            height: 70px; /* Высота иконки */
+        }
+
+    .icon-caption {
+        font-family: 'Keania One', cursive; /* Шрифт для подписи */
+        font-size: 20px; /* Размер шрифта подписи */
+        color: #000; /* Цвет текста */
+    }
+
+    .section-title-important {
+        font-family: 'Marck Script', cursive; /* Шрифт для первого абзаца */
+        font-size: 35px; /* Размер шрифта */
+        color: #1f0c0c; /* Цвет текста */
+        text-align: center; /* Выравнивание по ширине */
+        margin: 20px; /* Отступ вокруг текста */
+        margin-top: 40px;
+    }
+
+    .first-paragraph {
+        font-family: 'Tourney', cursive; /* Шрифт для первого абзаца */
+        font-size: 20px; /* Размер шрифта */
+        color: #E3FBFF; /* Цвет текста */
+        text-align: justify; /* Выравнивание по ширине */
+        margin: 20px; /* Отступ вокруг текста */
+    }
+
+    .second-paragraph {
+        font-family: 'Keania One', cursive; /* Шрифт для второго абзаца */
+        font-size: 18px; /* Размер шрифта */
+        color: #E3FBFF; /* Цвет текста */
+        text-align: justify; /* Выравнивание по ширине */
+        margin: 20px; /* Отступ вокруг текста */
+    }
+
+    .third-paragraph {
+        font-family: 'Titillium Web', sans-serif; /* Шрифт для третьего абзаца */
+        font-size: 18px; /* Размер шрифта */
+        color: #E3F2FD; /* Цвет текста */
+        text-align: center; /* Выравнивание по центру */
+        margin: 20px; /* Отступ вокруг текста */
+    }
+
+    .highlight {
+        text-decoration: underline; /* Подчеркнутый текст */
+        font-weight: bold; /* Жирный текст */
+    }
+
+    .carousel {
+        position: relative;
+        max-width: 800px; /* Ограничьте ширину карусели */
+        margin: 0 auto; /* Центрируйте карусель */
+    }
+
+    .carousel-inner {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .carousel-image {
+        width: 500px; /* Ширина */
+        height: 550px; /* Высота */
+        object-fit: cover; /* Сохранить пропорции без искажения */
+    }
+
+    .carousel-caption {
+        background-color: #DFF3F3;
+        padding: 15px;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+    }
+
+    .carousel-title {
+        font-family: 'Marck Script', cursive;
+        font-size: 25px;
+        color: #10524C;
+    }
+
+    .carousel-description {
+        font-family: 'Titillium Web', sans-serif;
+        font-size: 17px;
+        color: #10524C;
+    }
+
+    .carousel-item {
+        display: none; /* Скрывайте элементы по умолчанию */
+    }
+
+        .carousel-item.active {
+            display: flex; /* Показывайте активный элемент */
+        }
+
+    button.prev, button.next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.6);
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    button.prev {
+        left: 10px;
+    }
+
+    button.next {
+        right: 10px;
+    }
+
+    .news-title {
+        color: #CAF0F8;
+        font-size: 24px;
+        margin-bottom: 10px; /* Добавлено разделение */
+    }
+
+</style>
+
+<div class="full-screen-background"></div>
+
+
+<div class="content-wrapper">
+    <div class="section-title">О нас</div>
+    <div class="after-image-content">
+        <p>Не так важны дела, как стаканчик кофе или глинтвейна на пути к ним. Какие успехи, подвиги, достижения когда зябнешь от малейшего ветерка?.</p>
+        <p> На пути к потрясающим результатам — загляни в гастробар Mojo за незаменимыми горячими напитками. Бери их с собой и наблюдай, как мир пляшет перед твоими целями!✨.</p>
+       
+    </div>
+</div>
+
+<div class="section-title">Самое то, чтобы раслабиться</div>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+        <li data-target="#myCarousel" data-slide-to="5"></li>
+        <li data-target="#myCarousel" data-slide-to="6"></li>
+        <li data-target="#myCarousel" data-slide-to="7"></li>
+        <li data-target="#myCarousel" data-slide-to="8"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="{% static 'app/content/11.webp' %}" alt="1">
+        </div>
+        <div class="item">
+            <img src="{% static 'app/content/22.webp' %}" alt="2">
+        </div>
+        <div class="item">
+            <img src="{% static 'app/content/33.webp' %}" alt="3">
+        </div>
+        <div class="item">
+            <img src="{% static 'app/content/44.webp' %}" alt="4">
+        </div>
+        <div class="item">
+            <img src="{% static 'app/content/55.webp' %}" alt="5">
+        </div>
+        <div class="item">
+            <img src="{% static 'app/content/66.webp' %}" alt="6">
+        </div>
+        <div class="item">
+            <img src="{% static 'app/content/77.webp' %}" alt="7">
+        </div>
+        <div class="item">
+            <img src="{% static 'app/content/88.webp' %}" alt="8">
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Предыдущее</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Следующее</span>
+    </a>
+</div>
+
+<style>
+    .latest-news .read-more {
+        text-decoration: none;
+        color: #802929; /* Цвет ссылки */
+        font-weight: bold;
+    }
+
+        .latest-news .read-more:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="latest-news">
+    <h2>Последние новости</h2>
+    {% for news in latest_news %}
+    <div class="news-card">
+        <h3 class="news-title">{{ news.title }}</h3>
+        <p>
+            <a href="{% url 'news_detail' news.id %}" class="read-more">
+                <span>Читать далее</span> ➔  <!-- Вы можете заменить стрелочку на картинку, используя <img> вместо текста -->
+            </a>
+        </p>
+        <hr style="margin: 20px 0;"> <!-- Линия разделения -->
+    </div>
+    {% endfor %}
+</div>
+
+
+ {% endblock %}

@@ -1,0 +1,102 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали тура</title>
+    <style>
+        body {
+            background-color: #f8f9fa; /* Светло-серый фон */
+            font-family: 'Nunito', sans-serif;
+            color: #333; /* Темно-серый текст */
+            line-height: 1.6;
+            margin: 0;
+            transition: transform 0.3s ease; /* Добавлено для плавного перехода */
+        }
+
+        h1 {
+            font-family: 'Marck Script', cursive;
+            color: #244964;
+            font-size: 2em;
+            margin-bottom: 1em;
+            transition: transform 0.3s ease; /* Добавлено для плавного перехода */
+        }
+
+            h1:hover {
+                transform: scale(1.05); /* Увеличение на 5% */
+            }
+
+        .tour-detail-container {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px;
+        }
+
+        .tour-image {
+            margin-right: 20px;
+        }
+
+            .tour-image img {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+        .tour-info p {
+            color: #333;
+            font-size: 1.1em;
+            margin: 0.5em 0;
+            line-height: 1.5;
+            transition: transform 0.3s ease; /* Добавлено для плавного перехода */
+        }
+
+            .tour-info p:hover {
+                transform: scale(1.05); /* Увеличение на 5% */
+            }
+
+        .tour-description {
+            margin-top: 1em;
+            text-align: justify;
+            transition: transform 0.3s ease; /* Добавлено для плавного перехода */
+        }
+
+            .tour-description:hover {
+                transform: scale(1.05); /* Увеличение на 5% */
+            }
+
+        /* Дополнительные стили для улучшения читаемости */
+        .tour-info {
+            flex-grow: 1;
+        }
+
+        /* Для адаптивности - нужно добавить media queries или использовать фреймворк */
+
+
+    </style>
+</head>
+<body>
+    <div class="tour-detail-container">
+        <div class="tour-image">
+            <img src="{{ tour.image.url }}" alt="Изображение тура">
+        </div>
+        <div class="tour-info">
+            <h1>{{ tour.country }}</h1>
+            <p><strong>Цена:</strong> {{ tour.price }} руб.</p>
+        </div>
+    </div>
+
+    <div class="tour-description">
+        <p><strong>Описание:</strong></p>
+        <p>{{ tour.description|linebreaks }}</p>
+    </div>
+
+    <a href="{% url 'tours' %}">Назад к списку туров</a>
+</body>
+</html>
+{% endblock %}

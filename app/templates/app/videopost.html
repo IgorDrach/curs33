@@ -1,0 +1,66 @@
+{% extends "app/Layout.html" %}
+{% block content %}
+
+<style>
+    body {
+        background-color: #696969; /* Светло-серый фон */
+        color: #333; /* Темно-серый текст */
+        font-family: 'Open Sans', sans-serif; /* Открытый шрифт sans-serif для лучшей читаемости */
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6; /* Улучшает читаемость */
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 2.5em;
+        margin: 60px 0 30px 0;
+        color: #244964; /* Мягкий синий цвет заголовка */
+        font-family: 'Playfair Display', serif; /* Элегантный шрифт для заголовка */
+    }
+
+    h2 {
+        font-size: 2em;
+        color: #244964; /* Мягкий синий цвет подзаголовков */
+        margin-top: 30px;
+        border-bottom: 2px solid #008B8B;
+        padding-bottom: 10px;
+        font-weight: bold; /* Более выразительный подзаголовок */
+    }
+
+    video {
+        display: block;
+        margin: 40px auto; /* Центрируем видео */
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        max-width: 100%; /* Адаптивная ширина видео */
+        height: auto; /* Высота автоматически подстраивается под ширину */
+    }
+
+    hr {
+        border: none;
+        height: 1px;
+        background-color: #fff; /* Светло-серый разделитель */
+        margin: 40px 0;
+    }
+
+    /* Стили для улучшения доступности: */
+    a:focus, button:focus {
+        outline: 2px dashed #007bff; /* Визуальный фокус для пользователей с ограниченной подвижностью */
+    }
+
+</style>
+
+<h1>{{ title }}.</h1>
+<hr />
+<div>
+    <h2>Романтический ужин</h2>
+    <video src="/media/video1.mp4" controls="controls" width="800" height="auto" poster="/media/vv1.png"></video>
+</div>
+<hr />
+<div>
+    <h2>Встреча друзей</h2>
+    <video src="/media/video2.mp4" controls="controls" width="800" height="auto" poster="/media/vv2.png"></video>
+</div>
+
+{% endblock %}

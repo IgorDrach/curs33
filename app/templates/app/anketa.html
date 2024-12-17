@@ -1,0 +1,119 @@
+{% extends "app/layout.html" %}
+{% block content %}
+<br>
+<h1>Расскажите нам что-нибудь интересного</h1>
+<br>
+
+<style>
+    body {
+        background-color: #f8f9fa; /* Светло-серый фон - современный и нейтральный */
+        font-family: 'Roboto', sans-serif; /* Roboto - популярный современный шрифт */
+        margin: 0;
+        line-height: 1.6; /* Улучшает читаемость */
+        color: #333; /* Темно-серый текст */
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif; /* Элегантный шрифт для заголовков */
+        font-size: 3em; /* Размер текста заголовка -  относительный к размеру шрифта body */
+        color: #333; /* Темно-серый */
+        margin-bottom: 1em;
+    }
+
+    label {
+        font-weight: bold; /* Жирный шрифт для меток */
+        display: block; /* Каждая метка на новой строке */
+        margin-bottom: 0.5em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 0.8em;
+        margin-bottom: 1em;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 1em; /* Размер шрифта -  относительный к размеру шрифта body */
+    }
+
+    textarea {
+        min-height: 10em; /* Минимальная высота для textarea */
+    }
+
+
+    #submit-button {
+        background-color: #007bff; /* Синий цвет кнопки - стандартный Bootstrap */
+        color: white;
+        border: none;
+        padding: 0.8em 1.5em;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 1em;
+        transition: background-color 0.3s;
+    }
+
+        #submit-button:hover {
+            background-color: #0069d9; /* Темнее при наведении */
+        }
+
+    /* Стили для улучшения доступности: */
+    a:focus, button:focus {
+        outline: 2px dashed #007bff; /* Визуальный фокус для пользователей с ограниченной подвижностью */
+    }
+
+
+
+</style>
+
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <label for="full_name">Фамилия Имя Отчество:</label>
+        <input type="text" name="full_name" required><br><br>
+
+        <label for="phone_number">Номер телефона:</label>
+        <input type="text" name="phone_number" required><br><br>
+
+        <label for="email">Почта:</label>
+        <input type="email" name="email" required><br><br>
+        <label for="desired_tour">Напишите свое мнение</label>
+        <textarea name="desired_tour" required></textarea><br><br>         
+        <input type="submit" value="Отправить" id="submit-button">
+    </form>
+</div>
+
+
+<script>
+    function showActiveOptions(value) {
+        document.getElementById("active_options").style.display = value === 'active' ? 'block' : 'none';
+    }
+</script>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    document.getElementById("submit-button").addEventListener("mouseover", function () {
+        this.style.backgroundColor = "#caf0f8";
+        this.style.color = "#022b3a";
+    });
+
+    document.getElementById("submit-button").addEventListener("mouseout", function () {
+        this.style.backgroundColor = "#3498db";
+        this.style.color = "#fff";
+    });
+
+    var inputFields = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
+    inputFields.forEach(function (input) {
+        input.addEventListener('focus', function () {
+            this.style.backgroundColor = "#ade8f4";
+        });
+        input.addEventListener('blur', function () {
+            this.style.backgroundColor = "#fff";
+        });
+    });
+</script>
+{% endblock %}
